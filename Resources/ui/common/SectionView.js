@@ -33,6 +33,12 @@ function SectionView(client) {
 	    client.getItemsInSection(event.sectionId, success, failure, this);
 	});
 	
+	table.addEventListener('click', function (event) {
+	    self.fireEvent('itemSelected', {
+	        item: event.rowData.item
+	    });
+	});
+	
 	return self;
 };
 

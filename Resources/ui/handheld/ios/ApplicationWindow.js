@@ -2,6 +2,7 @@ function ApplicationWindow() {
 	//declare module dependencies
 	var HomeView = require('ui/common/HomeView'),
 		SectionView = require('ui/common/SectionView'),
+		ItemView = require('ui/common/ItemView'),
 		OpenPlatformClient = require('openplatform/Client');
 		
 	//create object instance
@@ -41,11 +42,21 @@ function ApplicationWindow() {
 	});
 	self.add(navGroup);
 	
-	//add behavior for master view
+	//launch section view when a section is selected
 	homeView.addEventListener('sectionSelected', function(event) {
 		sectionView.fireEvent('sectionSelected', event);
 		navGroup.open(sectionContainerWindow);
 	});
+	
+	//launch item view when an item is selected
+    sectionView.addEventListener('itemSelected', function(event) {
+        var itemContainerWindow = Ti.UI.createWindow({
+            title:event.item.webTitle
+        });
+        var itemView = new ItemView(event.item);
+        itemContainerWindow.add(itemView);
+        navGroup.open(itemContainerWindow);
+    });
 	
 	return self;
 };

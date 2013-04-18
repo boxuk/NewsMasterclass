@@ -11,12 +11,15 @@ function OpenPlatformClient(apiKey) {
  * @param {Object} scope
  */
 OpenPlatformClient.prototype.getItemsInSection = function (sectionId, success, failure, scope) {
-	var url = "http://content.guardianapis.com/search?section="+sectionId+"&format=json&api-key=" + this.apiKey;
-	Ti.API.info(url);
+	var url = "http://content.guardianapis.com/search?section="
+	        + sectionId +
+	        "&format=json&show-fields=thumbnail%2Cheadline%2Cbody&api-key=" 
+	        + this.apiKey;
+	        
 	var client = Ti.Network.createHTTPClient({
 	    // function called when the response data is available
         onload : function(e) {
-            Ti.API.info(this.responseText);
+            Ti.API.debug(this.responseText);
 	        var data = JSON.parse(this.responseText);
 	        success.apply(scope, [data]);
 	    },
