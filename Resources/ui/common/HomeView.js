@@ -2,7 +2,7 @@
  * The HomeView module creates the root view of the application in which 
  * sections of news are listed. 
  */
-function SectionView() {
+function HomeView() {
 	// Create view
 	var self = Ti.UI.createView({
 		backgroundColor:'white'
@@ -33,4 +33,4 @@ function SectionView() {
 	return self;
 };
 
-module.exports = SectionView;
+module.exports = HomeView;
